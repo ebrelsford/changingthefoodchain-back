@@ -4,6 +4,6 @@ ipython==2.1.0
 
 # Django requirements
 git+https://github.com/django/django.git@1.7b4
-git+https://github.com/feincms/feincms.git@master
+git+https://github.com/feincms/feincms.git@next
 django-honeypot==0.4.0
 git+https://github.com/ebrelsford/django-inplace.git@master
