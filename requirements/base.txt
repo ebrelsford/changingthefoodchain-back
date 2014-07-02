@@ -3,7 +3,7 @@ MySQL-python==1.2.5
 ipython==2.1.0
 
 # Django requirements
-git+https://github.com/django/django.git@1.7b4
+git+https://github.com/django/django.git@1.7c1
 git+https://github.com/feincms/feincms.git@next
 django-compressor==1.4
 django-honeypot==0.4.0
