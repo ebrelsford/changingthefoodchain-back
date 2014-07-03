@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^content/', include('content.urls')),
+    url(r'^organizations/', include('organizations.urls')),
 
     # Django REST Framework
     url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
