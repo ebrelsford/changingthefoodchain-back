@@ -86,6 +86,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'honeypot.middleware.HoneypotMiddleware',
+    'handthatfeeds.middleware.CrossSiteSharingMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
