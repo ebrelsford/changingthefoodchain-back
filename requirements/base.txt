@@ -8,3 +8,4 @@ git+https://github.com/feincms/feincms.git@next
 django-compressor==1.4
 django-honeypot==0.4.0
 git+https://github.com/ebrelsford/django-inplace.git@master
+djangorestframework==2.3.14

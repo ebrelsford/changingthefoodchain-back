@@ -54,8 +54,6 @@ TIME_ZONE = 'America/New_York'
 
 PROJECT_ROOT = os.path.join(abspath(dirname(__file__)), '..', '..')
 
-DATA_ROOT = os.path.join(PROJECT_ROOT, 'data')
-
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL = '/media/'
 
@@ -132,11 +130,13 @@ INSTALLED_APPS = (
     'feincms.module.medialibrary',
     'feincms.module.page',
     'honeypot',
+    'rest_framework',
 
     #
     # Project-specific
     #
     'cms',
+    'content',
     'organizations',
 
 )
