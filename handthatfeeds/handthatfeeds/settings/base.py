@@ -85,7 +85,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'honeypot.middleware.HoneypotMiddleware',
     'handthatfeeds.middleware.CrossSiteSharingMiddleware',
 )
 
@@ -130,7 +129,6 @@ INSTALLED_APPS = (
     'feincms',
     'feincms.module.medialibrary',
     'feincms.module.page',
-    'honeypot',
     'rest_framework',
 
     #
@@ -175,6 +173,3 @@ FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/content/richtext/init_tinymce4.html'
 FEINCMS_RICHTEXT_INIT_CONTEXT = {
     'TINYMCE_JS_URL': STATIC_URL + 'node_modules/tinymce/tinymce.min.js',
 }
-
-HONEYPOT_FIELD_NAME = 'homepage_url'
-HONEYPOT_VALUE = 'http://example.com/'
