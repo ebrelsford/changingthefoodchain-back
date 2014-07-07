@@ -3,15 +3,16 @@ import contextlib
 from fabric.api import *
 
 
-env.hosts = ['',]
+env.hosts = ['handthatfeeds',]
+env.shell = 'bash --rcfile ~/.bashrc -l -c'
 env.use_ssh_config = True
 
 server_project_dirs = {
-    'prod': '~/webapps/handthatfeeds/handthatfeeds',
+    'prod': '~/dev---django.thehandthatfeedsfilm.com/public/handthatfeeds/handthatfeeds',
 }
 
 server_collected_static = {
-    'prod': '~/webapps/handthatfeeds_static',
+    'prod': '~/dev---django.thehandthatfeedsfilm.com/public/static',
 }
 
 server_virtualenvs = {
@@ -48,7 +49,7 @@ def workon(version):
 @task
 def pull(version='prod'):
     with cdversion(version):
-        run('git pull --no-edit')
+        run('git pull')
 
 
 @task
@@ -63,12 +64,10 @@ def install_requirements(version='prod'):
 def build_static(version='prod'):
     with workon(version):
         run('django-admin.py collectstatic --noinput')
-    # TODO npm install too
+    with cdstatic(version, ''):
+        run('npm install')
     with cdstatic(version, ''):
         run('bower install')
-    # TODO instead of r.js, bundle and minify with grunt
-    with cdstatic(version, 'js'):
-        run('r.js -o app.build.js')
 
 
 @task
@@ -84,55 +83,19 @@ def migrate(version='prod'):
 
 
 @task
-def restart_django(version='prod'):
-    with workon(version):
-        run('supervisorctl -c %s restart %s' % (supervisord_conf,
-                                                supervisord_programs[version]))
-
-
-@task
-def restart_memcached():
-    run('supervisorctl -c %s restart memcached' % supervisord_conf)
-
-
-@task
-def status():
-    run('supervisorctl -c %s status' % supervisord_conf)
-
-
-@task
 def start(version='prod'):
     pull(version=version)
     install_requirements(version=version)
     syncdb(version=version)
     migrate(version=version)
     build_static(version=version)
-    with workon(version):
-        run('supervisorctl -c %s start %s' % (supervisord_conf,
-                                              supervisord_programs[version]))
-
-
-@task
-def stop(version='prod'):
-    with workon(version):
-        run('supervisorctl -c %s stop %s' % (supervisord_conf,
-                                             supervisord_programs[version]))
 
 
 @task
 def deploy():
+    run('echo $DJANGO_SETTINGS_MODULE')
     pull()
     install_requirements()
     syncdb()
     migrate()
     build_static()
-    restart_django()
-
-
-@task
-def prepare_environment(version='prod'):
-    # TODO
-    # mkvirtualenv
-    # clone code
-    # add2virtualenv
-    pass

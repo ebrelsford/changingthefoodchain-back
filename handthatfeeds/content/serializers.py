@@ -11,11 +11,11 @@ class PhotoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Photo
-        fields = ('organization', 'photo', 'url',)
+        fields = ('id', 'organization', 'photo', 'url',)
 
 
 class VideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ('organization', 'url',)
+        fields = ('id', 'organization', 'url',)
