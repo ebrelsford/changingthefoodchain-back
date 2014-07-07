@@ -32,9 +32,11 @@ class OrganizationSerializer(serializers.ModelSerializer):
 
 
 class OrganizationGeoSerializer(GeoFeatureModelSerializer):
+    sectors = serializers.SlugRelatedField(many=True, read_only=True,
+                                           slug_field='name')
     types = serializers.SlugRelatedField(many=True, read_only=True,
                                          slug_field='name')
     class Meta:
         model = Organization
-        fields = ('id', 'name', 'types',)
+        fields = ('id', 'name', 'sectors', 'types',)
         geo_field = 'centroid'
