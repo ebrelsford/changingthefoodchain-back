@@ -1,22 +1,5 @@
-{% load feincms_tags static %}
+{% load feincms_tags %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link rel="stylesheet" href="{% static "css/style.min.css" %}">
-        <script src="{% static "bower_components/modernizr/modernizr.js" %}"></script>
-    </head>
-    <body>
-        <main>
-            {% feincms_render_region feincms_page "main" request %}
-        </main>
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    </body>
-</html>
+<div class="page-content">
+    {% feincms_render_region feincms_page "main" request %}
+</div>
