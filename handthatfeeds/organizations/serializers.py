@@ -20,6 +20,7 @@ class TypeSerializer(serializers.ModelSerializer):
 
 
 class OrganizationSerializer(serializers.ModelSerializer):
+    """Serializer for outputting a single organization"""
     photos = PhotoSerializer(many=True, source='photo_set')
     sectors = SectorSerializer(many=True,)
     types = TypeSerializer(many=True,)
@@ -31,7 +32,21 @@ class OrganizationSerializer(serializers.ModelSerializer):
                   'sectors', 'types',)
 
 
+class OrganizationAddSerializer(GeoFeatureModelSerializer):
+    """Serializer for adding a new organization"""
+    sectors = serializers.SlugRelatedField(many=True, slug_field='name')
+    types = serializers.SlugRelatedField(many=True, slug_field='name')
+
+    class Meta:
+        model = Organization
+        fields = ('id', 'name', 'email', 'phone', 'address_line1', 'city',
+                  'state_province', 'postal_code', 'country',
+                  'sectors', 'types',)
+        geo_field = 'centroid'
+
+
 class OrganizationGeoSerializer(GeoFeatureModelSerializer):
+    """Serializer for outputting organizations as GeoJSON"""
     sectors = serializers.SlugRelatedField(many=True, read_only=True,
                                            slug_field='name')
     types = serializers.SlugRelatedField(many=True, read_only=True,

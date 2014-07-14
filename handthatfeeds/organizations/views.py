@@ -3,7 +3,8 @@ from rest_framework import generics, mixins
 from content.serializers import PhotoSerializer, VideoSerializer
 
 from .models import Organization
-from .serializers import OrganizationSerializer, OrganizationGeoSerializer
+from .serializers import (OrganizationAddSerializer, OrganizationSerializer,
+                          OrganizationGeoSerializer)
 
 
 class OrganizationPhotos(generics.ListAPIView):
@@ -31,7 +32,11 @@ class OrganizationList(mixins.ListModelMixin, mixins.CreateModelMixin,
                        generics.GenericAPIView):
 
     queryset = Organization.objects.all()
-    serializer_class = OrganizationGeoSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return OrganizationAddSerializer
+        return OrganizationGeoSerializer
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
