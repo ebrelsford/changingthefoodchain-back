@@ -28,15 +28,22 @@ class OrganizationDetail(generics.RetrieveAPIView):
     serializer_class = OrganizationSerializer
 
 
+class OrganizationGeoJSONList(generics.ListAPIView):
+    queryset = Organization.objects.all()
+    serializer_class = OrganizationGeoSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
 class OrganizationList(mixins.ListModelMixin, mixins.CreateModelMixin,
                        generics.GenericAPIView):
-
-    queryset = Organization.objects.all()
+    queryset = Organization.objects.all().order_by('name')
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
             return OrganizationAddSerializer
-        return OrganizationGeoSerializer
+        return OrganizationSerializer
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
