@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import pagination, renderers, serializers
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
 from content.serializers import PhotoSerializer
@@ -19,6 +19,18 @@ class TypeSerializer(serializers.ModelSerializer):
         fields = ('id', 'name',)
 
 
+class WrappingJSONRenderer(renderers.JSONRenderer):
+
+    def render(self, data, accepted_media_type=None, renderer_context=None):
+        root_name = getattr(renderer_context.get('view').get_serializer().Meta,
+                            'root_name', None)
+        if root_name:
+            data = { root_name: data }
+        return super(WrappingJSONRenderer, self).render(data,
+                                                        accepted_media_type,
+                                                        renderer_context)
+
+
 class OrganizationSerializer(serializers.ModelSerializer):
     """Serializer for outputting a single organization"""
     photos = PhotoSerializer(many=True, source='photo_set')
@@ -27,9 +39,22 @@ class OrganizationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Organization
+        root_name = 'organization'
         fields = ('id', 'name', 'email', 'phone', 'address_line1', 'city',
                   'state_province', 'postal_code', 'country', 'photos',
                   'sectors', 'types',)
+
+
+class MetaPaginationSerializer(serializers.Serializer):
+    next = pagination.NextPageField(source='*')
+    prev = pagination.PreviousPageField(source='*')
+    total_results = serializers.Field(source='paginator.count')
+
+
+class PaginatedOrganizationSerializer(pagination.BasePaginationSerializer):
+    model = Organization
+    results_field = 'organizations'
+    meta = MetaPaginationSerializer(source='*')
 
 
 class OrganizationAddSerializer(GeoFeatureModelSerializer):

@@ -1,10 +1,11 @@
-from rest_framework import generics, mixins
+from rest_framework import generics, mixins, renderers
 
 from content.serializers import PhotoSerializer, VideoSerializer
 
 from .models import Organization
 from .serializers import (OrganizationAddSerializer, OrganizationSerializer,
-                          OrganizationGeoSerializer)
+                          OrganizationGeoSerializer,
+                          PaginatedOrganizationSerializer, WrappingJSONRenderer)
 
 
 class OrganizationPhotos(generics.ListAPIView):
@@ -26,6 +27,7 @@ class OrganizationVideos(generics.ListAPIView):
 class OrganizationDetail(generics.RetrieveAPIView):
     queryset = Organization.objects.all()
     serializer_class = OrganizationSerializer
+    renderer_classes = (WrappingJSONRenderer, renderers.BrowsableAPIRenderer)
 
 
 class OrganizationGeoJSONList(generics.ListAPIView):
@@ -38,6 +40,9 @@ class OrganizationGeoJSONList(generics.ListAPIView):
 
 class OrganizationList(mixins.ListModelMixin, mixins.CreateModelMixin,
                        generics.GenericAPIView):
+    model = Organization
+    paginate_by = 50
+    pagination_serializer_class = PaginatedOrganizationSerializer
     queryset = Organization.objects.all().order_by('name')
 
     def get_serializer_class(self):
