@@ -45,9 +45,21 @@ class OrganizationSerializer(serializers.ModelSerializer):
                   'sectors', 'types',)
 
 
+class NextPageNumberField(serializers.Field):
+
+    def to_native(self, value):
+        return value.next_page_number()
+
+
+class CurrentPageNumberField(serializers.Field):
+
+    def to_native(self, value):
+        return value.number
+
+
 class MetaPaginationSerializer(serializers.Serializer):
-    next = pagination.NextPageField(source='*')
-    prev = pagination.PreviousPageField(source='*')
+    next_page = NextPageNumberField(source='*')
+    current_page = CurrentPageNumberField(source='*')
     total_results = serializers.Field(source='paginator.count')
 
 
