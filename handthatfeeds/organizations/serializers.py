@@ -1,7 +1,7 @@
 from rest_framework import pagination, renderers, serializers
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
-from content.serializers import PhotoSerializer
+from content.serializers import PhotoSerializer, VideoSerializer
 from .models import Organization, Sector, Type
 
 
@@ -36,13 +36,14 @@ class OrganizationSerializer(serializers.ModelSerializer):
     photos = PhotoSerializer(many=True, source='photo_set')
     sectors = SectorSerializer(many=True,)
     types = TypeSerializer(many=True,)
+    videos = VideoSerializer(many=True, source='video_set')
 
     class Meta:
         model = Organization
         root_name = 'organization'
         fields = ('id', 'name', 'email', 'phone', 'address_line1', 'city',
                   'state_province', 'postal_code', 'country', 'photos',
-                  'sectors', 'types',)
+                  'sectors', 'types', 'videos',)
 
 
 class NextPageNumberField(serializers.Field):
