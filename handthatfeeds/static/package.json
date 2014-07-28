@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "main": "index.js",
   "dependencies": {
-    "tinymce": "^4.0.28"
+    "tinymce": "^4.1.2"
   },
   "devDependencies": {
     "browserify": "^4.1.10",
