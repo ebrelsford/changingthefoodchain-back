@@ -11,6 +11,7 @@ class SectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sector
         fields = ('id', 'name',)
+        root_name = 'sectors'
 
 
 class TypeSerializer(serializers.ModelSerializer):
@@ -18,6 +19,7 @@ class TypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Type
         fields = ('id', 'name',)
+        root_name = 'types'
 
 
 class WrappingJSONRenderer(renderers.JSONRenderer):

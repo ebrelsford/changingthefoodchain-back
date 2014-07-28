@@ -3,6 +3,8 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
+from organizations.views import SectorList, TypeList
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -10,6 +12,9 @@ urlpatterns = patterns('',
 
     url(r'^content/', include('content.urls')),
     url(r'^organizations/', include('organizations.urls')),
+
+    url(r'sectors', SectorList.as_view()),
+    url(r'types', TypeList.as_view()),
 
     # Django REST Framework
     url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),

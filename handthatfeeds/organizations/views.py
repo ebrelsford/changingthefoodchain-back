@@ -2,10 +2,11 @@ from rest_framework import generics, mixins, renderers
 
 from content.serializers import PhotoSerializer, VideoSerializer
 
-from .models import Organization
+from .models import Organization, Sector, Type
 from .serializers import (OrganizationAddSerializer, OrganizationSerializer,
                           OrganizationGeoSerializer, OrganizationNameSerializer,
-                          PaginatedOrganizationSerializer, WrappingJSONRenderer)
+                          PaginatedOrganizationSerializer, SectorSerializer,
+                          TypeSerializer, WrappingJSONRenderer)
 
 
 class OrganizationPhotos(generics.ListAPIView):
@@ -63,3 +64,31 @@ class OrganizationList(mixins.ListModelMixin, mixins.CreateModelMixin,
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+
+
+#
+# Sectors
+#
+
+
+class SectorList(generics.ListAPIView):
+    queryset = Sector.objects.all()
+    renderer_classes = (WrappingJSONRenderer, renderers.BrowsableAPIRenderer)
+    serializer_class = SectorSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+#
+# Types
+#
+
+
+class TypeList(generics.ListAPIView):
+    queryset = Type.objects.all()
+    renderer_classes = (WrappingJSONRenderer, renderers.BrowsableAPIRenderer)
+    serializer_class = TypeSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
