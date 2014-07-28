@@ -3,7 +3,7 @@ from os.path import abspath, dirname
 
 from django.core.exceptions import ImproperlyConfigured
 
-ENV_VARIABLE_PREFIX = 'HANDTHATFEEDS'
+ENV_VARIABLE_PREFIX = 'FCWA'
 
 def get_env_variable(var_name, optional=False):
     """Get the environment variable or return exception"""
@@ -20,12 +20,13 @@ def get_env_variable(var_name, optional=False):
 
 DATABASES = {
     'default': {
-        # > createdb -T template_postgis livinglotsla
-        # > psql
-        # # create user livinglotsla with password 'password';
-        # # grant all privileges on database livinglotsla to
-        # livinglotsla;
-        'ENGINE': 'django.contrib.gis.db.backends.mysql',
+        # > createdb fcwa
+        # > psql fcwa
+        # # create extension postgis;
+        # # create extension postgis_topology;
+        # # create user fcwa with password 'password';
+        # # grant all privileges on database fcwa to fcwa;
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': get_env_variable('DB_NAME'),
         'USER': get_env_variable('DB_USER'),
         'PASSWORD': get_env_variable('DB_PASSWORD'),
