@@ -10,14 +10,25 @@ class Command(BaseCommand):
     args = 'filename'
     help = 'Load the organizations in the given CSV'
 
+    type_abbreviations = {
+        'a': 'advocacy group',
+        's': 'service organization',
+        'u': 'union',
+        'wc': 'workers center',
+    }
+
     def get_sectors(self, raw):
         sectors = [sector.strip() for sector in raw.lower().split('/')]
         return [Sector.objects.get_or_create(name=s)[0] for s in sectors]
 
+    def get_type(self, name):
+        fullname = self.type_abbreviations[name.lower()]
+        type, created = Type.objects.get_or_create(name=fullname)
+        return type
+
     def get_types(self, raw):
-        # TODO expand to full type names
         types = [t.strip() for t in raw.lower().split('/')]
-        return [Type.objects.get_or_create(name=t)[0] for t in types]
+        return [self.get_type(t) for t in types]
 
     def handle(self, filename, *args, **options):
         for row in csv.DictReader(open(filename, 'r')):
@@ -38,6 +49,10 @@ class Command(BaseCommand):
                 phone=row['Phone #'],
                 centroid=point,
             )
-            organization.save()
-            organization.sectors.add(*self.get_sectors(row['Food Sector(s)']))
-            organization.types.add(*self.get_types(row['Organization Type']))
+            try:
+                organization.save()
+                organization.sectors.add(*self.get_sectors(row['Food Sector(s)']))
+                organization.types.add(*self.get_types(row['Organization Type']))
+            except Exception:
+                print 'Failed to save organization %s' % organization.name
+                continue
