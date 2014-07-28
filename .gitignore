@@ -1,4 +1,5 @@
 .project
+.ropeproject
 .*.swp
 *.pyc
 logins
