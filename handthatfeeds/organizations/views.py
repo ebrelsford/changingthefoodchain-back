@@ -4,7 +4,7 @@ from content.serializers import PhotoSerializer, VideoSerializer
 
 from .models import Organization
 from .serializers import (OrganizationAddSerializer, OrganizationSerializer,
-                          OrganizationGeoSerializer,
+                          OrganizationGeoSerializer, OrganizationNameSerializer,
                           PaginatedOrganizationSerializer, WrappingJSONRenderer)
 
 
@@ -28,6 +28,14 @@ class OrganizationDetail(generics.RetrieveAPIView):
     queryset = Organization.objects.all()
     serializer_class = OrganizationSerializer
     renderer_classes = (WrappingJSONRenderer, renderers.BrowsableAPIRenderer)
+
+
+class OrganizationNameList(generics.ListAPIView):
+    queryset = Organization.objects.all()
+    serializer_class = OrganizationNameSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
 
 class OrganizationGeoJSONList(generics.ListAPIView):

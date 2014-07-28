@@ -1,5 +1,6 @@
 from rest_framework import pagination, renderers, serializers
-from rest_framework_gis.serializers import GeoFeatureModelSerializer
+from rest_framework_gis.serializers import (GeoModelSerializer,
+                                            GeoFeatureModelSerializer)
 
 from content.serializers import PhotoSerializer, VideoSerializer
 from .models import Organization, Sector, Type
@@ -31,7 +32,16 @@ class WrappingJSONRenderer(renderers.JSONRenderer):
                                                         renderer_context)
 
 
-class OrganizationSerializer(serializers.ModelSerializer):
+class OrganizationNameSerializer(serializers.ModelSerializer):
+    """Serializer for outputting organizations' names"""
+
+    class Meta:
+        model = Organization
+        root_name = 'organization'
+        fields = ('id', 'name',)
+
+
+class OrganizationSerializer(GeoModelSerializer):
     """Serializer for outputting a single organization"""
     photos = PhotoSerializer(many=True, source='photo_set')
     sectors = SectorSerializer(many=True,)
@@ -43,7 +53,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
         root_name = 'organization'
         fields = ('id', 'name', 'email', 'phone', 'address_line1', 'city',
                   'state_province', 'postal_code', 'country', 'photos',
-                  'sectors', 'types', 'videos',)
+                  'centroid', 'sectors', 'types', 'videos',)
 
 
 class NextPageNumberField(serializers.Field):
