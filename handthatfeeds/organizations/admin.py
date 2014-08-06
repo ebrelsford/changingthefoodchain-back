@@ -1,9 +1,22 @@
 from django.contrib import admin
 
-from .models import Type
+from .models import Organization, Sector, Type
+
+
+class OrganizationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'address_line1', 'city', 'state_province',)
+    list_filter = ('sectors', 'types')
+    search_fields = ('name', 'address_line1', 'city', 'state_province',)
+
+
+class SectorAdmin(admin.ModelAdmin):
+    pass
 
 
 class TypeAdmin(admin.ModelAdmin):
     pass
 
+
+admin.site.register(Organization, OrganizationAdmin)
+admin.site.register(Sector, SectorAdmin)
 admin.site.register(Type, TypeAdmin)
