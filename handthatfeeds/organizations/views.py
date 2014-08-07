@@ -52,7 +52,17 @@ class OrganizationList(mixins.ListModelMixin, mixins.CreateModelMixin,
     model = Organization
     paginate_by = 50
     pagination_serializer_class = PaginatedOrganizationSerializer
-    queryset = Organization.objects.all().order_by('name')
+
+    def get_queryset(self):
+        qs = Organization.objects.all()
+        sectors = self.request.QUERY_PARAMS.get('sectors', None)
+        types = self.request.QUERY_PARAMS.get('types', None)
+
+        if sectors:
+            qs = qs.filter(sectors__name__in=sectors.split(','))
+        if types:
+            qs = qs.filter(types__name__in=types.split(','))
+        return qs.order_by('name')
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
