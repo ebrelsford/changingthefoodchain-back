@@ -61,7 +61,10 @@ class OrganizationSerializer(GeoModelSerializer):
 class NextPageNumberField(serializers.Field):
 
     def to_native(self, value):
-        return value.next_page_number()
+        try:
+            return value.next_page_number()
+        except Exception:
+            return None
 
 
 class CurrentPageNumberField(serializers.Field):
