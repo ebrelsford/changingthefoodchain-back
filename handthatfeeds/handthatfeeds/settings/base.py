@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     #
     # third-party
     #
+    'elephantblog',
     'feincms',
     'feincms.module.medialibrary',
     'feincms.module.page',
@@ -137,6 +138,7 @@ INSTALLED_APPS = (
     #
     'cms',
     'content',
+    'news',
     'organizations',
 
 )

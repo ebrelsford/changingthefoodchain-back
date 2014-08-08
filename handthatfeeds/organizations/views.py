@@ -55,6 +55,7 @@ class OrganizationList(mixins.ListModelMixin, mixins.CreateModelMixin,
 
     def get_queryset(self):
         qs = Organization.objects.all()
+        sortby = self.request.QUERY_PARAMS.get('sortby', 'name')
         sectors = self.request.QUERY_PARAMS.get('sectors', None)
         types = self.request.QUERY_PARAMS.get('types', None)
 
@@ -62,7 +63,7 @@ class OrganizationList(mixins.ListModelMixin, mixins.CreateModelMixin,
             qs = qs.filter(sectors__name__in=sectors.split(','))
         if types:
             qs = qs.filter(types__name__in=types.split(','))
-        return qs.order_by('name')
+        return qs.order_by(sortby)
 
     def get_serializer_class(self):
         if self.request.method == 'POST':

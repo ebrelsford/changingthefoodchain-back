@@ -1,5 +1,7 @@
 {% load feincms_tags %}
 
-<div class="page-content">
-    {% feincms_render_region feincms_page "main" request %}
-</div>
+{% block content %}
+    <div class="page-content">
+        {% feincms_render_region feincms_page "main" request %}
+    </div>
+{% endblock %}

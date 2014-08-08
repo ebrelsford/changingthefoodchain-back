@@ -5,6 +5,7 @@ ipython==2.1.0
 # Django requirements
 git+https://github.com/django/django.git@1.7c2
 git+https://github.com/feincms/feincms.git@next
+feincms-elephantblog>=1.0.0
 django-compressor==1.4
 git+https://github.com/ebrelsford/django-inplace.git@master
 djangorestframework==2.3.14
