@@ -1,5 +1,4 @@
 # Non-Django requirements
-psycopg2==2.5.3
 ipython==2.1.0
 
 # Django requirements
