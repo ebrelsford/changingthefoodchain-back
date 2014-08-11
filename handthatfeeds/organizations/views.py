@@ -2,11 +2,12 @@ from rest_framework import generics, mixins, renderers
 
 from content.serializers import PhotoSerializer, VideoSerializer
 
+from handthatfeeds.api import WrappingJSONRenderer
 from .models import Organization, Sector, Type
 from .serializers import (OrganizationAddSerializer, OrganizationSerializer,
                           OrganizationGeoSerializer, OrganizationNameSerializer,
                           PaginatedOrganizationSerializer, SectorSerializer,
-                          TypeSerializer, WrappingJSONRenderer)
+                          TypeSerializer)
 
 
 class OrganizationPhotos(generics.ListAPIView):

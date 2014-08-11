@@ -4,7 +4,7 @@ from elephantblog.urls import elephantblog_patterns
 
 
 urlpatterns = patterns('',
-    url(r'^blog/', include(elephantblog_patterns(
+    url(r'', include(elephantblog_patterns(
         list_kwargs={'only_active_language': False},
     ))),
 )
