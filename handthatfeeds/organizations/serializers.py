@@ -19,7 +19,7 @@ class TypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Type
-        fields = ('id', 'name',)
+        fields = ('id', 'name', 'description', 'image',)
         root_name = 'types'
 
 

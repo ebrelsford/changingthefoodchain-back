@@ -21,6 +21,8 @@ class Sector(models.Model):
 
 class Type(models.Model):
     name = models.CharField(max_length=50,)
+    description = models.TextField(blank=True, null=True)
+    image = models.URLField(blank=True, null=True)
 
     def __unicode__(self):
         return self.name
