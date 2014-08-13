@@ -48,6 +48,7 @@ class Command(BaseCommand):
                 email=row['Email'],
                 phone=row['Phone #'],
                 site_url=row['website'] or None,
+                mission=row['Mission'] or None,
                 centroid=point,
             )
             try:
