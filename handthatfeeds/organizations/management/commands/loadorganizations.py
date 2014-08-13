@@ -47,6 +47,7 @@ class Command(BaseCommand):
                 postal_code=row['Zip'],
                 email=row['Email'],
                 phone=row['Phone #'],
+                site_url=row['website'] or None,
                 centroid=point,
             )
             try:

@@ -44,7 +44,7 @@ class OrganizationSerializer(GeoModelSerializer):
         root_name = 'organization'
         fields = ('id', 'name', 'email', 'phone', 'address_line1', 'city',
                   'state_province', 'postal_code', 'country', 'photos',
-                  'centroid', 'sectors', 'types', 'videos',)
+                  'centroid', 'sectors', 'types', 'videos', 'site_url',)
 
 
 class PaginatedOrganizationSerializer(pagination.BasePaginationSerializer):
@@ -61,8 +61,8 @@ class OrganizationAddSerializer(GeoFeatureModelSerializer):
     class Meta:
         model = Organization
         fields = ('id', 'name', 'email', 'phone', 'address_line1', 'city',
-                  'state_province', 'postal_code', 'country',
-                  'sectors', 'types',)
+                  'state_province', 'postal_code', 'country', 'sectors',
+                  'types', 'site_url',)
         geo_field = 'centroid'
 
 

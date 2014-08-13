@@ -5,6 +5,7 @@ from inplace.models import Place
 
 class Organization(Place):
     email = models.EmailField(blank=True, null=True,)
+    site_url = models.URLField(blank=True, null=True,)
     phone = models.CharField(max_length=15, blank=True, null=True,)
     sectors = models.ManyToManyField('Sector', blank=True, null=True,)
     types = models.ManyToManyField('Type', blank=True, null=True,)
