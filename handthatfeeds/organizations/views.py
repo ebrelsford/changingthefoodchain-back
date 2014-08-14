@@ -41,11 +41,14 @@ class OrganizationNameList(generics.ListAPIView):
 
 
 class OrganizationGeoJSONList(generics.ListAPIView):
-    queryset = Organization.objects.all()
     serializer_class = OrganizationGeoSerializer
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+    def get_queryset(self):
+        print 'get_queryset'
+        return Organization.objects.prefetch_related('sectors', 'types').all()
 
 
 class OrganizationList(mixins.ListModelMixin, mixins.CreateModelMixin,
