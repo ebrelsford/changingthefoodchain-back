@@ -47,7 +47,6 @@ class OrganizationGeoJSONList(generics.ListAPIView):
         return self.list(request, *args, **kwargs)
 
     def get_queryset(self):
-        print 'get_queryset'
         return Organization.objects.prefetch_related('sectors', 'types').all()
 
 
