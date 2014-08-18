@@ -7,7 +7,7 @@ from .serializers import PhotoSerializer, VideoSerializer
 class PhotoList(mixins.ListModelMixin, mixins.CreateModelMixin,
                 generics.GenericAPIView):
 
-    queryset = Photo.objects.all()
+    queryset = Photo.objects.filter(visible=True)
     serializer_class = PhotoSerializer
 
     def get(self, request, *args, **kwargs):
@@ -20,7 +20,7 @@ class PhotoList(mixins.ListModelMixin, mixins.CreateModelMixin,
 class VideoList(mixins.ListModelMixin, mixins.CreateModelMixin,
                   generics.GenericAPIView):
 
-    queryset = Video.objects.all()
+    queryset = Video.objects.filter(visible=True)
     serializer_class = VideoSerializer
 
     def get(self, request, *args, **kwargs):

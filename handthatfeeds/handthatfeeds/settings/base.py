@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'feincms',
     'feincms.module.medialibrary',
     'feincms.module.page',
+    'moderation',
     'rest_framework',
 
     #

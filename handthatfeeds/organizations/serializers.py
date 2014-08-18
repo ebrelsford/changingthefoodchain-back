@@ -3,6 +3,7 @@ from rest_framework_gis.serializers import (GeoModelSerializer,
                                             GeoFeatureModelSerializer)
 
 from handthatfeeds.api import MetaPaginationSerializer
+from content.models import Photo, Video
 from content.serializers import PhotoSerializer, VideoSerializer
 from .models import Organization, Sector, Type
 
@@ -34,10 +35,18 @@ class OrganizationNameSerializer(serializers.ModelSerializer):
 
 class OrganizationSerializer(GeoModelSerializer):
     """Serializer for outputting a single organization"""
-    photos = PhotoSerializer(many=True, source='photo_set')
+    photos = serializers.SerializerMethodField('get_photos')
     sectors = SectorSerializer(many=True,)
     types = TypeSerializer(many=True,)
-    videos = VideoSerializer(many=True, source='video_set')
+    videos = serializers.SerializerMethodField('get_videos')
+
+    def get_photos(self, obj):
+        photos = Photo.objects.filter(organization=obj, visible=True)
+        return PhotoSerializer(photos).data
+
+    def get_videos(self, obj):
+        videos = Video.objects.filter(organization=obj, visible=True)
+        return VideoSerializer(videos).data
 
     class Meta:
         model = Organization

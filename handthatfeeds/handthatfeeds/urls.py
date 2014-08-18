@@ -3,10 +3,14 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
+from moderation.helpers import auto_discover as moderation_autodiscover
+
 from news.views import CategoryList, EntryDetail, EntryList
 from organizations.views import SectorList, TypeList
 
 admin.autodiscover()
+moderation_autodiscover()
+
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),

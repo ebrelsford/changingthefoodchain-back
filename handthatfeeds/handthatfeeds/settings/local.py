@@ -9,6 +9,10 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+DJANGO_MODERATION_MODERATORS = (
+    'moderator@example.com',
+)
+
 TIME_ZONE = 'America/New_York'
 
 LOGGING = {

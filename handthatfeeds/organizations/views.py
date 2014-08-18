@@ -27,13 +27,13 @@ class OrganizationVideos(generics.ListAPIView):
 
 
 class OrganizationDetail(generics.RetrieveAPIView):
-    queryset = Organization.objects.all()
+    queryset = Organization.objects.filter(visible=True)
     serializer_class = OrganizationSerializer
     renderer_classes = (WrappingJSONRenderer, renderers.BrowsableAPIRenderer)
 
 
 class OrganizationNameList(generics.ListAPIView):
-    queryset = Organization.objects.all()
+    queryset = Organization.objects.filter(visible=True)
     serializer_class = OrganizationNameSerializer
 
     def get(self, request, *args, **kwargs):
@@ -57,7 +57,7 @@ class OrganizationList(mixins.ListModelMixin, mixins.CreateModelMixin,
     pagination_serializer_class = PaginatedOrganizationSerializer
 
     def get_queryset(self):
-        qs = Organization.objects.all()
+        qs = Organization.objects.filter(visible=True)
         sortby = self.request.QUERY_PARAMS.get('sortby', 'name')
         sectors = self.request.QUERY_PARAMS.get('sectors', None)
         types = self.request.QUERY_PARAMS.get('types', None)

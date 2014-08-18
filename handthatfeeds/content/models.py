@@ -1,7 +1,9 @@
 from django.db import models
 
+from handthatfeeds.models import ModerationVisible
 
-class Content(models.Model):
+
+class Content(ModerationVisible):
     added = models.DateTimeField(auto_now=True)
     added_by = models.EmailField()
     organization = models.ForeignKey('organizations.Organization')
