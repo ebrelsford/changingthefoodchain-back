@@ -23,12 +23,12 @@ ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS').split(',')
 #INSTALLED_APPS += (
     # 'mailer',
 # )
-# EMAIL_BACKEND = 'mailer.backend.DbBackend'
-# EMAIL_HOST = get_env_variable('EMAIL_HOST')
-# EMAIL_HOST_USER = get_env_variable('EMAIL_USER')
-# EMAIL_HOST_PASSWORD = get_env_variable('EMAIL_PASSWORD')
-# DEFAULT_FROM_EMAIL = get_env_variable('DEFAULT_FROM_EMAIL')
-# SERVER_EMAIL = get_env_variable('SERVER_EMAIL')
+EMAIL_BACKEND = 'mailer.backend.DbBackend'
+EMAIL_HOST = get_env_variable('EMAIL_HOST')
+EMAIL_HOST_USER = get_env_variable('EMAIL_USER')
+EMAIL_HOST_PASSWORD = get_env_variable('EMAIL_PASSWORD')
+DEFAULT_FROM_EMAIL = get_env_variable('DEFAULT_FROM_EMAIL')
+SERVER_EMAIL = get_env_variable('SERVER_EMAIL')
 
 
 #
