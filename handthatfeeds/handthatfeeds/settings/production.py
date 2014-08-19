@@ -36,8 +36,8 @@ SERVER_EMAIL = get_env_variable('SERVER_EMAIL')
 #
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'cache_table',
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'unix:' + get_env_variable('MEMCACHED_SOCKET'),
     }
 }
 
