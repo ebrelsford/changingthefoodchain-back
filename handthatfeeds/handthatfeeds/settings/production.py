@@ -15,20 +15,6 @@ DJANGO_MODERATION_MODERATORS = (
 )
 
 ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS').split(',')
-MEDIA_ROOT = get_env_variable('MEDIA_ROOT')
-STATIC_ROOT = get_env_variable('STATIC_ROOT')
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.mysql',
-        'NAME': get_env_variable('DB_NAME'),
-        'USER': get_env_variable('DB_USER'),
-        'PASSWORD': get_env_variable('DB_PASSWORD'),
-        'HOST': get_env_variable('DB_HOST'),
-        'PORT': get_env_variable('DB_PORT'),
-    }
-}
 
 
 #
