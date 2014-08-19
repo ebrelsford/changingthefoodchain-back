@@ -1,5 +1,6 @@
 # Non-Django requirements
 ipython==2.1.0
+psycopg2==2.5.3
 
 # Django requirements
 git+https://github.com/django/django.git@1.7c2
