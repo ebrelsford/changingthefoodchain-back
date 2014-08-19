@@ -20,9 +20,9 @@ ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS').split(',')
 #
 # email
 #
-#INSTALLED_APPS += (
-    # 'mailer',
-# )
+INSTALLED_APPS += (
+    'mailer',
+)
 EMAIL_BACKEND = 'mailer.backend.DbBackend'
 EMAIL_HOST = get_env_variable('EMAIL_HOST')
 EMAIL_HOST_USER = get_env_variable('EMAIL_USER')
