@@ -43,6 +43,22 @@ CACHES = {
 
 
 #
+# CORS headers
+#
+INSTALLED_APPS += (
+    'corsheaders',
+)
+
+MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
+) + MIDDLEWARE_CLASSES
+
+CORS_ORIGIN_WHITELIST = (
+    'dev---front.thehandthatfeedsfilm.com',
+)
+
+
+#
 # logging
 #
 LOGGING = {
