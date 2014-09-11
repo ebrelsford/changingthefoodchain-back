@@ -2,7 +2,7 @@ from rest_framework import pagination, serializers
 
 from elephantblog.models import Entry
 
-from handthatfeeds.api import MetaPaginationSerializer
+from changingthefoodchain.api import MetaPaginationSerializer
 
 
 class RegionField(serializers.Field):

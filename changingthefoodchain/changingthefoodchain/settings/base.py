@@ -3,7 +3,7 @@ from os.path import abspath, dirname
 
 from django.core.exceptions import ImproperlyConfigured
 
-ENV_VARIABLE_PREFIX = 'FCWA'
+ENV_VARIABLE_PREFIX = 'CTFC'
 
 def get_env_variable(var_name, optional=False):
     """Get the environment variable or return exception"""
@@ -86,7 +86,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'handthatfeeds.middleware.CrossSiteSharingMiddleware',
+    'changingthefoodchain.middleware.CrossSiteSharingMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -100,9 +100,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'feincms.context_processors.add_page_if_missing',
 )
 
-ROOT_URLCONF = 'handthatfeeds.urls'
+ROOT_URLCONF = 'changingthefoodchain.urls'
 
-WSGI_APPLICATION = 'handthatfeeds.wsgi.application'
+WSGI_APPLICATION = 'changingthefoodchain.wsgi.application'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates'),
@@ -171,7 +171,7 @@ LOGGING = {
 #RECAPTCHA_PRIVATE_KEY = get_env_variable('RECAPTCHA_PRIVATE_KEY')
 #RECAPTCHA_PUBLIC_KEY = get_env_variable('RECAPTCHA_PUBLIC_KEY')
 
-EMAIL_SUBJECT_PREFIX = '[handthatfeeds] '
+EMAIL_SUBJECT_PREFIX = '[Changing the Food Chain] '
 
 FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/content/richtext/init_tinymce4.html'
 FEINCMS_RICHTEXT_INIT_CONTEXT = {

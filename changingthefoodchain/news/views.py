@@ -5,7 +5,7 @@ from braces.views import JSONResponseMixin
 from elephantblog.models import Category, Entry
 from rest_framework import generics, renderers
 
-from handthatfeeds.api import WrappingJSONRenderer
+from changingthefoodchain.api import WrappingJSONRenderer
 from .serializers import EntrySerializer, PaginatedEntrySerializer
 
 

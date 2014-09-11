@@ -2,7 +2,7 @@ from rest_framework import pagination, serializers
 from rest_framework_gis.serializers import (GeoModelSerializer,
                                             GeoFeatureModelSerializer)
 
-from handthatfeeds.api import MetaPaginationSerializer
+from changingthefoodchain.api import MetaPaginationSerializer
 from content.models import Photo, Video
 from content.serializers import PhotoSerializer, VideoSerializer
 from .models import Organization, Sector, Type

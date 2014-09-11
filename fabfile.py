@@ -3,24 +3,24 @@ import contextlib
 from fabric.api import *
 
 
-env.hosts = ['handthatfeeds',]
+env.hosts = ['changingthefoodchain',]
 env.shell = 'bash --rcfile ~/.bashrc -l -c'
 env.use_ssh_config = True
 
 server_project_dirs = {
-    'prod': '~/dev---django.thehandthatfeedsfilm.com/public/handthatfeeds/handthatfeeds',
+    'prod': '~/webapps/fcwaapi/changingthefoodchain/changingthefoodchain',
 }
 
 server_collected_static = {
-    'prod': '~/dev---django.thehandthatfeedsfilm.com/public/static',
+    'prod': '~/webapps/fcwaapi_static',
 }
 
 server_virtualenvs = {
-    'prod': 'handthatfeeds',
+    'prod': 'changingthefoodchain',
 }
 
 supervisord_programs = {
-    'prod': 'handthatfeeds',
+    'prod': 'changingthefoodchain',
 }
 
 supervisord_conf = '~/var/supervisor/supervisord.conf'

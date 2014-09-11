@@ -1,6 +1,6 @@
 from django.db import models
 
-from handthatfeeds.models import ModerationVisible
+from changingthefoodchain.models import ModerationVisible
 from inplace.models import Place
 
 

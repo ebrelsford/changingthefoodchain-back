@@ -1,6 +1,6 @@
 from moderation import moderation
 
-from handthatfeeds.moderator import StandardModerator
+from changingthefoodchain.moderator import StandardModerator
 from .models import Organization
 
 
