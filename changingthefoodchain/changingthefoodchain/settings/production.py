@@ -16,6 +16,7 @@ DJANGO_MODERATION_MODERATORS = (
 )
 
 ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS').split(',')
+BASE_URL = 'http://backend.changingthefoodchain.org'
 
 
 #

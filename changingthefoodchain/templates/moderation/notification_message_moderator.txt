@@ -1,0 +1,3 @@
+{% load organizations_tags %}Whoo! New {{ content_type }} needs to be moderated.
+
+{% setting "BASE_URL" as base_url %}You can moderate it here: {{ base_url }}{{ moderated_object.get_admin_moderate_url }}
