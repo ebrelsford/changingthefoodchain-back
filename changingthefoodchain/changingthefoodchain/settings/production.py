@@ -57,6 +57,15 @@ CORS_ORIGIN_WHITELIST = (
     'changingthefoodchain.org',
 )
 
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'authorization',
+    'content-type',
+    'origin',
+    'pragma',
+    'x-csrftoken'
+    'x-requested-with',
+)
 
 #
 # logging
