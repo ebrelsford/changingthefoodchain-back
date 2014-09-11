@@ -3,24 +3,24 @@ import contextlib
 from fabric.api import *
 
 
-env.hosts = ['changingthefoodchain',]
+env.hosts = ['ctfc',]
 env.shell = 'bash --rcfile ~/.bashrc -l -c'
 env.use_ssh_config = True
 
 server_project_dirs = {
-    'prod': '~/webapps/fcwaapi/changingthefoodchain/changingthefoodchain',
+    'prod': '~/webapps/fcwaapi/changingthefoodchain-back',
 }
 
 server_collected_static = {
-    'prod': '~/webapps/fcwaapi_static',
+    'prod': '~/webapps/ctfc_static',
 }
 
 server_virtualenvs = {
-    'prod': 'changingthefoodchain',
+    'prod': 'fcwaapi',
 }
 
 supervisord_programs = {
-    'prod': 'changingthefoodchain',
+    'prod': 'ctfc',
 }
 
 supervisord_conf = '~/var/supervisor/supervisord.conf'
@@ -66,8 +66,6 @@ def build_static(version='prod'):
         run('django-admin.py collectstatic --noinput')
     with cdstatic(version, ''):
         run('npm install')
-    with cdstatic(version, ''):
-        run('bower install')
 
 
 @task
@@ -83,6 +81,15 @@ def migrate(version='prod'):
 
 
 @task
+def restart_django(version='prod'):
+    with workon(version):
+        run('supervisorctl --config %s restart %s' % (
+            supervisord_conf,
+            supervisord_programs[version],
+        ))
+
+
+@task
 def start(version='prod'):
     pull(version=version)
     install_requirements(version=version)
@@ -93,9 +100,9 @@ def start(version='prod'):
 
 @task
 def deploy():
-    run('echo $DJANGO_SETTINGS_MODULE')
     pull()
     install_requirements()
     syncdb()
     migrate()
     build_static()
+    restart_django()
