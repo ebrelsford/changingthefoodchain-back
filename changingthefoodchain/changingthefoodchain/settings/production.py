@@ -54,7 +54,7 @@ MIDDLEWARE_CLASSES = (
 ) + MIDDLEWARE_CLASSES
 
 CORS_ORIGIN_WHITELIST = (
-    'changingthefoodchain.com',
+    'changingthefoodchain.org',
 )
 
 
