@@ -72,3 +72,11 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+#
+# CORS
+#
+CORS_ORIGIN_WHITELIST = (
+    'localhost',
+)

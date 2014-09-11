@@ -138,6 +138,7 @@ INSTALLED_APPS = (
     # Project-specific
     #
     'cms',
+    'contact',
     'content',
     'news',
     'organizations',
@@ -177,3 +178,27 @@ FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/content/richtext/init_tinymce4.html'
 FEINCMS_RICHTEXT_INIT_CONTEXT = {
     'TINYMCE_JS_URL': STATIC_URL + 'node_modules/tinymce/tinymce.min.js',
 }
+
+
+#
+# CORS headers
+#
+INSTALLED_APPS += (
+    'corsheaders',
+)
+
+MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
+) + MIDDLEWARE_CLASSES
+
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'cache-control',
+    'content-type',
+    'origin',
+    'pragma',
+    'x-csrftoken'
+    'x-requested-with',
+)

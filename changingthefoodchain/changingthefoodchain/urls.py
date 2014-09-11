@@ -15,6 +15,7 @@ moderation_autodiscover()
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
+    url(r'^contact/', include('contact.urls')),
     url(r'^content/', include('content.urls')),
     url(r'^news/', include('news.urls')),
     url(r'^organizations/', include('organizations.urls')),

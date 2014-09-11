@@ -2,12 +2,13 @@ import os
 
 from .base import *
 
+
 ADMINS = (
     ('Eric', 'ebrelsford@gmail.com'),
 )
 
 MANAGERS = (
-    ('', 'managers@example.com'),
+    ('Eric', 'ebrelsford@gmail.com'),
 )
 
 DJANGO_MODERATION_MODERATORS = (
@@ -43,31 +44,12 @@ CACHES = {
 
 
 #
-# CORS headers
+# CORS
 #
-INSTALLED_APPS += (
-    'corsheaders',
-)
-
-MIDDLEWARE_CLASSES = (
-    'corsheaders.middleware.CorsMiddleware',
-) + MIDDLEWARE_CLASSES
-
 CORS_ORIGIN_WHITELIST = (
     'changingthefoodchain.org',
 )
 
-CORS_ALLOW_HEADERS = (
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'cache-control',
-    'content-type',
-    'origin',
-    'pragma',
-    'x-csrftoken'
-    'x-requested-with',
-)
 
 #
 # logging

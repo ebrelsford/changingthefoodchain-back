@@ -7,6 +7,7 @@ Django==1.7
 git+https://github.com/feincms/feincms.git@next
 feincms-elephantblog>=1.0.0
 django-compressor==1.4
+django-cors-headers==0.13
 git+https://github.com/ebrelsford/django-inplace.git@master
 django-moderation==0.3.6
 djangorestframework==2.3.14
