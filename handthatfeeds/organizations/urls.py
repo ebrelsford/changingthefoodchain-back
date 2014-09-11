@@ -11,6 +11,6 @@ urlpatterns = patterns('',
     url(r'(?P<pk>\d+)/videos/', OrganizationVideos.as_view()),
     url(r'(?P<pk>\d+)', OrganizationDetail.as_view()),
     url(r'geojson/', cache_page(60 * 60)(OrganizationGeoJSONList.as_view())),
-    url(r'names/', cache_page(60 * 60)(OrganizationNameList.as_view())),
+    url(r'names/', OrganizationNameList.as_view()),
     url(r'', OrganizationList.as_view()),
 )

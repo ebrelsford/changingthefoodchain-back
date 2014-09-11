@@ -26,11 +26,21 @@ class TypeSerializer(serializers.ModelSerializer):
 
 class OrganizationNameSerializer(serializers.ModelSerializer):
     """Serializer for outputting organizations' names"""
+    displayName = serializers.SerializerMethodField('get_display_name')
+
+    def get_display_name(self, obj):
+        location = None
+        if obj.city or obj.state_province:
+            locations = filter(lambda x: x is not None, [obj.city, obj.state_province])
+            location = ', '.join(locations)
+        if location:
+            return '%s (%s)' % (obj.name, location)
+        return obj.name
 
     class Meta:
         model = Organization
         root_name = 'organization'
-        fields = ('id', 'name',)
+        fields = ('id', 'name', 'displayName',)
 
 
 class OrganizationSerializer(GeoModelSerializer):

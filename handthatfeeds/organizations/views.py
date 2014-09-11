@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework import generics, mixins, renderers
 
 from content.serializers import PhotoSerializer, VideoSerializer
@@ -35,6 +36,17 @@ class OrganizationDetail(generics.RetrieveAPIView):
 class OrganizationNameList(generics.ListAPIView):
     queryset = Organization.objects.filter(visible=True)
     serializer_class = OrganizationNameSerializer
+
+    def get_queryset(self):
+        qs = Organization.objects.all()
+        q = self.request.QUERY_PARAMS.get('q')
+        if (q):
+            qs = qs.filter(
+                Q(name__icontains=q) |
+                Q(city__icontains=q) |
+                Q(state_province__icontains=q)
+            )
+        return qs
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
