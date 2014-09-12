@@ -13,7 +13,7 @@ class ContactView(FormView):
 
     def form_valid(self, form):
         cleaned_data = form.cleaned_data
-        mail_managers('New contact', """
+        mail_managers('Someone just got in contact!', """
 From: %s
 Subject: %s
 
