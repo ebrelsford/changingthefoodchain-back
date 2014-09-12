@@ -9,10 +9,12 @@ ADMINS = (
 
 MANAGERS = (
     ('Info', 'info@changingthefoodchain.org'),
+    ('Eric', 'ebrelsford@gmail.com'),
 )
 
 DJANGO_MODERATION_MODERATORS = (
     'info@changingthefoodchain.org',
+    'ebrelsford@gmail.com',
 )
 
 ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS').split(',')
