@@ -80,9 +80,9 @@ class OrganizationAddSerializer(GeoFeatureModelSerializer):
 
     class Meta:
         model = Organization
-        fields = ('id', 'name', 'email', 'phone', 'address_line1', 'city',
-                  'state_province', 'postal_code', 'country', 'sectors',
-                  'types', 'site_url', 'mission',)
+        fields = ('id', 'name', 'email', 'phone', 'address_line1',
+                  'address_line2', 'city', 'state_province', 'postal_code',
+                  'country', 'sectors', 'types', 'site_url', 'mission',)
         geo_field = 'centroid'
 
 
