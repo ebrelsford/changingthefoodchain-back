@@ -1,3 +1,4 @@
+from django.contrib.gis.geos import Polygon
 from django.db.models import Q
 from rest_framework import generics, mixins, renderers
 
@@ -70,10 +71,13 @@ class OrganizationList(mixins.ListModelMixin, mixins.CreateModelMixin,
 
     def get_queryset(self):
         qs = Organization.objects.filter(visible=True)
+        bbox = self.request.QUERY_PARAMS.get('bbox', None)
         sortby = self.request.QUERY_PARAMS.get('sortby', 'name')
         sectors = self.request.QUERY_PARAMS.get('sectors', None)
         types = self.request.QUERY_PARAMS.get('types', None)
 
+        if bbox:
+            qs = qs.filter(centroid__within=Polygon.from_bbox(bbox.split(',')))
         if sectors:
             qs = qs.filter(sectors__name__in=sectors.split(','))
         if types:
