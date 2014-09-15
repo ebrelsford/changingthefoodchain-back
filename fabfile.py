@@ -7,6 +7,10 @@ env.hosts = ['ctfc',]
 env.shell = 'bash --rcfile ~/.bashrc -l -c'
 env.use_ssh_config = True
 
+server_front = {
+    'prod': '~/webapps/changingthefoodchainfront',
+}
+
 server_project_dirs = {
     'prod': '~/webapps/fcwaapi/changingthefoodchain-back',
 }
@@ -106,3 +110,8 @@ def deploy():
     migrate()
     build_static()
     restart_django()
+
+@task
+def deploy_front():
+    with(cd(server_front['prod'])):
+        run('git pull --no-edit')
