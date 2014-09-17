@@ -1,16 +1,15 @@
 from django.contrib import admin
 
-from moderation.admin import ModerationAdmin
-
 from .models import Organization, Sector, Type
 
 
-class OrganizationAdmin(ModerationAdmin):
+class OrganizationAdmin(admin.ModelAdmin):
     fields = ('name',
               ('address_line1', 'address_line2',),
               ('city', 'state_province', 'country',),
               ('email', 'phone',),
-              'site_url', 'mission',
+              'site_url',
+              ('mission', 'mission_es',),
               ('sectors', 'types',),
               'centroid',)
     list_display = ('name', 'address_line1', 'city', 'state_province',)

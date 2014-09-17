@@ -64,7 +64,7 @@ class OrganizationSerializer(GeoModelSerializer):
         fields = ('id', 'name', 'email', 'phone', 'address_line1', 'city',
                   'state_province', 'postal_code', 'country', 'photos',
                   'centroid', 'sectors', 'types', 'videos', 'site_url',
-                  'mission',)
+                  'mission', 'mission_es',)
 
 
 class PaginatedOrganizationSerializer(pagination.BasePaginationSerializer):
