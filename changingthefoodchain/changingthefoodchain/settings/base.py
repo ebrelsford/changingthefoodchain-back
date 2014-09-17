@@ -202,3 +202,9 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken'
     'x-requested-with',
 )
+
+
+ABSOLUTE_URL_OVERRIDES = {
+    'organizations.organization': 
+        lambda o: 'http://changingthefoodchain.org/#/organizations/%d' % o.pk
+}
