@@ -174,7 +174,7 @@ LOGGING = {
 
 EMAIL_SUBJECT_PREFIX = '[Changing the Food Chain] '
 
-FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/content/richtext/init_tinymce4.html'
+FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/cms/init_tinymce4.html'
 FEINCMS_RICHTEXT_INIT_CONTEXT = {
     'TINYMCE_JS_URL': STATIC_URL + 'node_modules/tinymce/tinymce.min.js',
 }
