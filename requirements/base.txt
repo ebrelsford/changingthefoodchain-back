@@ -4,7 +4,7 @@ psycopg2==2.5.3
 
 # Django requirements
 Django==1.7
-git+https://github.com/feincms/feincms.git@next
+FeinCMS==1.10.1
 feincms-elephantblog>=1.0.0
 django-classy-tags>=0.5.1
 django-compressor==1.4
