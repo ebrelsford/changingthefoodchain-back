@@ -14,14 +14,14 @@ class Organization(ModerationVisible, Place):
     types = models.ManyToManyField('Type', blank=True, null=True,)
 
     def __unicode__(self):
-        return self.name
+        return u'%s' % self.name
 
 
 class Sector(models.Model):
     name = models.CharField(max_length=50,)
 
     def __unicode__(self):
-        return self.name
+        return u'%s' % self.name
 
 
 class Type(models.Model):
@@ -30,4 +30,4 @@ class Type(models.Model):
     image = models.URLField(blank=True, null=True)
 
     def __unicode__(self):
-        return self.name
+        return u'%s' % self.name
