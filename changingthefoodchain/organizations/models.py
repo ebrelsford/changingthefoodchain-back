@@ -19,6 +19,7 @@ class Organization(ModerationVisible, Place):
 
 class Sector(models.Model):
     name = models.CharField(max_length=50,)
+    name_es = models.CharField(max_length=50, blank=True, null=True)
 
     def __unicode__(self):
         return u'%s' % self.name
@@ -26,6 +27,7 @@ class Sector(models.Model):
 
 class Type(models.Model):
     name = models.CharField(max_length=50,)
+    name_es = models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     image = models.URLField(blank=True, null=True)
 

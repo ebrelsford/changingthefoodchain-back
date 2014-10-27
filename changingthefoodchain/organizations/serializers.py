@@ -12,7 +12,7 @@ class SectorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sector
-        fields = ('id', 'name',)
+        fields = ('id', 'name', 'name_es',)
         root_name = 'sectors'
 
 
@@ -20,7 +20,7 @@ class TypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Type
-        fields = ('id', 'name', 'description', 'image',)
+        fields = ('id', 'name', 'name_es', 'description', 'image',)
         root_name = 'types'
 
 
