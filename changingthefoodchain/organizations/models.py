@@ -12,6 +12,7 @@ class Organization(ModerationVisible, Place):
     mission_es = models.TextField(blank=True, null=True)
     sectors = models.ManyToManyField('Sector', blank=True, null=True,)
     types = models.ManyToManyField('Type', blank=True, null=True,)
+    fcwa_organization = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u'%s' % self.name
