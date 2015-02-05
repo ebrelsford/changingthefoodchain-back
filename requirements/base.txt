@@ -5,7 +5,7 @@ psycopg2==2.5.3
 unicodecsv==0.9.4
 
 # Django requirements
-Django==1.7
+Django==1.7.4
 FeinCMS==1.10.1
 feincms-elephantblog>=1.0.0
 django-classy-tags>=0.5.1
