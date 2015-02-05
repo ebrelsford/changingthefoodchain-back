@@ -88,11 +88,12 @@ class OrganizationAddSerializer(GeoFeatureModelSerializer):
 
 class OrganizationGeoSerializer(GeoFeatureModelSerializer):
     """Serializer for outputting organizations as GeoJSON"""
+    fcwa_organization = serializers.BooleanField(read_only=True)
     sectors = serializers.SlugRelatedField(many=True, read_only=True,
                                            slug_field='name')
     types = serializers.SlugRelatedField(many=True, read_only=True,
                                          slug_field='name')
     class Meta:
         model = Organization
-        fields = ('id', 'name', 'sectors', 'types',)
+        fields = ('id', 'name', 'fcwa_organization', 'sectors', 'types',)
         geo_field = 'centroid'
