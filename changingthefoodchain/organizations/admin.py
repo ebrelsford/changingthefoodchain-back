@@ -15,6 +15,7 @@ class OrganizationAdmin(admin.ModelAdmin):
               'centroid',)
     list_display = ('name', 'address_line1', 'city', 'state_province',
                     'site_url', 'email', 'phone',)
+    list_editable = ('site_url', 'email', 'phone',)
     list_filter = ('sectors', 'types', 'fcwa_organization',)
     search_fields = ('name', 'address_line1', 'city', 'state_province',)
 
