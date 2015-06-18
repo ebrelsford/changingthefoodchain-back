@@ -13,7 +13,8 @@ class OrganizationAdmin(admin.ModelAdmin):
               ('sectors', 'types',),
               'fcwa_organization',
               'centroid',)
-    list_display = ('name', 'address_line1', 'city', 'state_province',)
+    list_display = ('name', 'address_line1', 'city', 'state_province',
+                    'site_url', 'email', 'phone',)
     list_filter = ('sectors', 'types', 'fcwa_organization',)
     search_fields = ('name', 'address_line1', 'city', 'state_province',)
 
