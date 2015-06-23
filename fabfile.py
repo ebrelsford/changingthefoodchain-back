@@ -72,11 +72,6 @@ def build_static(version='prod'):
         run('npm install')
 
 
-@task
-def syncdb(version='prod'):
-    with workon(version):
-        run('django-admin.py syncdb')
-
 
 @task
 def migrate(version='prod'):
@@ -97,7 +92,6 @@ def restart_django(version='prod'):
 def start(version='prod'):
     pull(version=version)
     install_requirements(version=version)
-    syncdb(version=version)
     migrate(version=version)
     build_static(version=version)
 
@@ -106,7 +100,6 @@ def start(version='prod'):
 def deploy():
     pull()
     install_requirements()
-    syncdb()
     migrate()
     build_static()
     restart_django()
