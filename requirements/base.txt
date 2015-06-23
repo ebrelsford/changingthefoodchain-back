@@ -13,6 +13,7 @@ django-classy-tags>=0.5.1
 django-compressor==1.4
 django-cors-headers==1.1.0
 git+https://github.com/ebrelsford/django-inplace.git@v0.3.0
+django-leaflet==0.16.0
 django-moderation==0.3.6
 git+https://github.com/ebrelsford/django-rest-framework.git@907bbe235ce9
 git+https://github.com/djangonauts/django-rest-framework-gis.git@b12691085

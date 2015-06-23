@@ -9,6 +9,7 @@ from elephantblog.models import Entry
 Entry.register_extensions(
     'feincms.module.extensions.translations',
     'news.linkextension',
+    'news.locationextension',
 )
 
 Entry.register_regions(

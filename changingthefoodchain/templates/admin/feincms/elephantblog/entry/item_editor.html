@@ -1,0 +1,51 @@
+{% extends "admin/feincms/item_editor.html" %}
+{% load i18n static %}
+
+{% block object-tools %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "node_modules/Leaflet.GeoSearch/src/css/l.geosearch.css" %}">
+    <script src="{% static "node_modules/Leaflet.GeoSearch/src/js/l.control.geosearch.js" %}"></script>
+    <script src="{% static "node_modules/Leaflet.GeoSearch/src/js/l.geosearch.provider.google.js" %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            var map;
+
+            // Wait for django-leaflet to load map
+            window.addEventListener('map:init', function (e) {
+                map = e.detail.map;
+
+                // Add L.GeoSearch for geocoding
+                new L.Control.GeoSearch({
+                    provider: new L.GeoSearch.Provider.Google(),
+                    showMarker: false
+                }).addTo(map);
+
+                // When a field is loaded, hold onto that field and wait for
+                // the toggle to be clicked
+                map.on('map:loadfield', function (e) {
+                    // Invalidate map so it shows up
+                    map.invalidateSize();
+
+                    // If geom, zoom in to it
+                    var geometryField = $('#id_location');;
+                    if (geometryField.val()) {
+                        var geometryLayer = L.geoJson(JSON.parse(geometryField.val()));
+                        map.fitBounds(geometryLayer.getBounds(), { maxZoom: 15 });
+                    }
+                });
+            });
+
+            $('.navi_tab').on('click', function () {
+                if ($('#id_location_div_map').is(':visible')) {
+                    map.fire('map:loadfield');
+                }
+            });
+        });
+    </script>
+<ul class="extra-object-tools">
+	{% if original and not original.is_active %}
+        <li><a target="_blank" href="{{ original.get_absolute_url }}?eb_preview=1" class="viewsitelink">{% trans "Preview" %}</a></li>
+	{% endif %}
+</ul>
+{% endblock %}

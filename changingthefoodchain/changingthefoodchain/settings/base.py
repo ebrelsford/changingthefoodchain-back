@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'feincms',
     'feincms.module.medialibrary',
     'feincms.module.page',
+    'leaflet',
     'moderation',
     'rest_framework',
 
@@ -207,4 +208,14 @@ CORS_ALLOW_HEADERS = (
 ABSOLUTE_URL_OVERRIDES = {
     'organizations.organization': 
         lambda o: 'http://changingthefoodchain.org/#/organizations/%d' % o.pk
+}
+
+
+#
+# Leaflet
+#
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (39.027719, -97.910156),
+    'DEFAULT_ZOOM': 4,
+    'MIN_ZOOM': 4,
 }
