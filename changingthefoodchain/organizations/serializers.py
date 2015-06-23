@@ -52,11 +52,11 @@ class OrganizationSerializer(GeoModelSerializer):
 
     def get_photos(self, obj):
         photos = Photo.objects.filter(organization=obj, visible=True)
-        return PhotoSerializer(photos).data
+        return [PhotoSerializer(photo).data for photo in photos]
 
     def get_videos(self, obj):
         videos = Video.objects.filter(organization=obj, visible=True)
-        return VideoSerializer(videos).data
+        return [VideoSerializer(video).data for video in videos]
 
     class Meta:
         model = Organization
