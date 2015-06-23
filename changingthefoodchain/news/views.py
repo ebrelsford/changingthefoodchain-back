@@ -6,7 +6,8 @@ from elephantblog.models import Category, Entry
 from rest_framework import generics, renderers
 
 from changingthefoodchain.api import WrappingJSONRenderer
-from .serializers import EntrySerializer, PaginatedEntrySerializer
+from .serializers import (EntrySerializer, EntryGeoSerializer,
+                          PaginatedEntrySerializer)
 
 
 class CategoryList(JSONResponseMixin, ListView):
@@ -29,6 +30,16 @@ class CategoryList(JSONResponseMixin, ListView):
             'categories': [category_dict(category) for category in
                            self.get_queryset()],
         })
+
+
+class EntryGeoJSONList(generics.ListAPIView):
+    serializer_class = EntryGeoSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return Entry.objects.filter(is_active=True)
 
 
 class EntryList(generics.ListAPIView):

@@ -1,4 +1,6 @@
 from rest_framework import pagination, serializers
+from rest_framework_gis.serializers import (GeoFeatureModelSerializer,
+                                            GeoModelSerializer)
 
 from elephantblog.models import Entry
 
@@ -18,7 +20,7 @@ class RegionField(serializers.Field):
         return ''.join([c.render(**context) for c in getattr(value, self.region)])
 
 
-class EntrySerializer(serializers.ModelSerializer):
+class EntrySerializer(GeoModelSerializer):
     cover = RegionField(region='cover', source='content')
     main = RegionField(region='main', source='content')
     preview = RegionField(region='preview', source='content')
@@ -26,8 +28,16 @@ class EntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Entry
         fields = ('id', 'title', 'author', 'published_on', 'preview', 'main',
-                  'cover', 'categories', 'link', 'read_more_at',)
+                  'cover', 'categories', 'link', 'read_more_at', 'location',)
         root_name = 'entries'
+
+
+class EntryGeoSerializer(GeoFeatureModelSerializer):
+
+    class Meta:
+        model = Entry
+        fields = ('id', 'title', 'published_on', 'categories',)
+        geo_field = 'location'
 
 
 class PaginatedEntrySerializer(pagination.BasePaginationSerializer):
