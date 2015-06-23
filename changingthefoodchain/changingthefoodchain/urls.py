@@ -5,7 +5,7 @@ from django.contrib import admin
 
 from moderation.helpers import auto_discover as moderation_autodiscover
 
-from news.views import CategoryList, EntryDetail, EntryList
+from news.views import CategoryList
 from organizations.views import SectorList, TypeList
 
 admin.autodiscover()
@@ -20,8 +20,7 @@ urlpatterns = patterns('',
     url(r'^news/', include('news.urls')),
     url(r'^organizations/', include('organizations.urls')),
 
-    url(r'^entries/(?P<pk>\d+)$', EntryDetail.as_view()),
-    url(r'^entries/', EntryList.as_view()),
+    url(r'^entries/', include('news.entry_urls')),
     url(r'^categories/$', CategoryList.as_view()),
     url(r'^sectors', SectorList.as_view()),
     url(r'^types', TypeList.as_view()),
