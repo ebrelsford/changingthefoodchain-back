@@ -60,7 +60,8 @@ class OrganizationGeoJSONList(generics.ListAPIView):
         return self.list(request, *args, **kwargs)
 
     def get_queryset(self):
-        return Organization.objects.prefetch_related('sectors', 'types').all()
+        return Organization.objects.prefetch_related('sectors', 'types') \
+                .filter(visible=True)
 
 
 class OrganizationList(mixins.ListModelMixin, mixins.CreateModelMixin,
