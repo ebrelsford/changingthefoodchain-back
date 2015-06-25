@@ -36,7 +36,7 @@ class EntryGeoSerializer(GeoFeatureModelSerializer):
 
     class Meta:
         model = Entry
-        fields = ('id', 'title', 'published_on', 'categories',)
+        fields = ('id', 'title', 'published_on', 'categories', 'is_featured',)
         geo_field = 'location'
 
 
