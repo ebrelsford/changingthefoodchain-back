@@ -51,11 +51,11 @@ class EntryList(generics.ListAPIView):
     def get_queryset(self):
         qs = Entry.objects.filter(is_active=True)
 
-        category = self.request.QUERY_PARAMS.get('category', None)
+        categories = self.request.QUERY_PARAMS.get('category', None)
         featured = self.request.QUERY_PARAMS.get('featured', None)
 
-        if category:
-            qs = qs.filter(categories=category)
+        if categories:
+            qs = qs.filter(categories__in=categories.split(','))
         if featured and featured.lower() == 'true':
             qs = qs.filter(is_featured=True)
 
