@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.utils.translation import ugettext as _
 
 from feincms.content.richtext.models import RichTextContent
 from feincms.content.medialibrary.models import MediaFileContent
+from feincms_oembed.contents import OembedContent
 
 from elephantblog.models import Entry
 
@@ -25,3 +27,10 @@ Entry.create_content_type(RichTextContent,
 Entry.create_content_type(MediaFileContent, TYPE_CHOICES=(
     ('default', _('default')),
 ))
+
+Entry.create_content_type(OembedContent,
+    TYPE_CHOICES=(
+        ('default', _('Default'), { 'maxwidth': 500, 'maxheight': 300, 'wmode': 'opaque'}),
+    ),
+    PARAMS={'wmode': 'opaque', 'key': settings.EMBEDLY_KEY}
+)

@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     #
     'elephantblog',
     'feincms',
+    'feincms_oembed',
     'feincms.module.medialibrary',
     'feincms.module.page',
     'leaflet',
@@ -219,3 +220,5 @@ LEAFLET_CONFIG = {
     'DEFAULT_CENTER': (39.027719, -97.910156),
     'DEFAULT_ZOOM': 4,
 }
+
+EMBEDLY_KEY = get_env_variable('EMBEDLY_KEY')
