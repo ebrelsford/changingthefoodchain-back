@@ -33,10 +33,12 @@ class EntrySerializer(GeoModelSerializer):
 
 
 class EntryGeoSerializer(GeoFeatureModelSerializer):
+    cover = RegionField(region='cover', source='content')
 
     class Meta:
         model = Entry
-        fields = ('id', 'title', 'published_on', 'categories', 'is_featured',)
+        fields = ('id', 'title', 'published_on', 'categories', 'is_featured',
+                  'cover',)
         geo_field = 'location'
 
 
