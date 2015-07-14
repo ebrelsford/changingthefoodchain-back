@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^organizations/', include('organizations.urls')),
 
     url(r'^entries/', include('news.entry_urls')),
-    url(r'^categories/$', CategoryList.as_view()),
+    url(r'^categories$', CategoryList.as_view()),
     url(r'^sectors', SectorList.as_view()),
     url(r'^types', TypeList.as_view()),
 
