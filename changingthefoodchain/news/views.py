@@ -26,10 +26,12 @@ class CategoryList(JSONResponseMixin, ListView):
                 d['name'] = c.translations.get(language_code=default_language).title
             return d
 
-        return self.render_json_response({
+        response = self.render_json_response({
             'categories': [category_dict(category) for category in
                            self.get_queryset()],
         })
+        response['Allow'] = 'GET, HEAD, OPTIONS'
+        return response
 
 
 class EntryGeoJSONList(generics.ListAPIView):
