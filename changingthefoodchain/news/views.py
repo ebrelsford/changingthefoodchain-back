@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.views.generic import ListView
 
 from braces.views import JSONResponseMixin
@@ -14,16 +13,12 @@ class CategoryList(JSONResponseMixin, ListView):
     model = Category
 
     def get(self, request, *args, **kwargs):
-        default_language = settings.LANGUAGE_CODE
-        language = request.GET.get('language', default_language)
         def category_dict(c):
             d = {
                 'id': c.pk,
+                'name': c.translations.get(language_code='en').title,
+                'name_es': c.translations.get(language_code='es').title,
             }
-            try:
-                d['name'] = c.translations.get(language_code=language).title
-            except Exception:
-                d['name'] = c.translations.get(language_code=default_language).title
             return d
 
         response = self.render_json_response({
