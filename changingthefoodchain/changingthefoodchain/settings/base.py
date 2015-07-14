@@ -208,8 +208,8 @@ CORS_ALLOW_HEADERS = (
 
 
 ABSOLUTE_URL_OVERRIDES = {
-    'organizations.organization': 
-        lambda o: 'http://changingthefoodchain.org/#/organizations/%d' % o.pk
+    'elephantblog.entry': lambda o: 'http://changingthefoodchain.org/#/news/%d' % o.pk,
+    'organizations.organization': lambda o: 'http://changingthefoodchain.org/#/organizations/%d' % o.pk,
 }
 
 
