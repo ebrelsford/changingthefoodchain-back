@@ -222,3 +222,4 @@ LEAFLET_CONFIG = {
 }
 
 EMBEDLY_KEY = get_env_variable('EMBEDLY_KEY')
+OEMBED_PROVIDER = 'news.oembed_providers.minimalist'
