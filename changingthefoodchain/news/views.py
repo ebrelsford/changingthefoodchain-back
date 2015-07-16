@@ -56,10 +56,17 @@ class EntryList(generics.ListAPIView):
         if featured and featured.lower() == 'true':
             qs = qs.filter(is_featured=True)
 
-        # Filter by language
+        # Filter by language. If not english, try to find a translation.
+        qs = qs.filter(language='en')
         language = self.request.QUERY_PARAMS.get('language', 'en')
-        if language:
-            qs = qs.filter(language=language)
+        if language != 'en':
+            pks = []
+            for e in qs:
+                try:
+                    pks.append(e.translations.get(language=language).pk)
+                except Entry.DoesNotExist:
+                    pks.append(e.pk)
+            qs = Entry.objects.filter(pk__in=pks)
 
         return qs.order_by('-published_on')
 
