@@ -29,22 +29,7 @@ class CategoryList(JSONResponseMixin, ListView):
         return response
 
 
-class EntryGeoJSONList(generics.ListAPIView):
-    serializer_class = EntryGeoSerializer
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-    def get_queryset(self):
-        return Entry.objects.filter(is_active=True)
-
-
-class EntryList(generics.ListAPIView):
-    model = Entry
-    paginate_by = 20
-    pagination_serializer_class = PaginatedEntrySerializer
-    serializer_class = EntrySerializer
-
+class EntryListMixin(object):
     def get_queryset(self):
         qs = Entry.objects.filter(is_active=True)
 
@@ -69,6 +54,20 @@ class EntryList(generics.ListAPIView):
             qs = Entry.objects.filter(pk__in=pks)
 
         return qs.order_by('-published_on')
+
+
+class EntryGeoJSONList(EntryListMixin, generics.ListAPIView):
+    serializer_class = EntryGeoSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+class EntryList(EntryListMixin, generics.ListAPIView):
+    model = Entry
+    paginate_by = 20
+    pagination_serializer_class = PaginatedEntrySerializer
+    serializer_class = EntrySerializer
 
 
 class EntryDetail(generics.RetrieveAPIView):
