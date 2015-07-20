@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.utils.translation import ugettext as _
 
+from feincms.content.raw.models import RawContent
 from feincms.content.richtext.models import RichTextContent
 from feincms.content.medialibrary.models import MediaFileContent
 from feincms_oembed.contents import OembedContent
@@ -33,4 +34,8 @@ Entry.create_content_type(OembedContent,
         ('default', _('Default'), { 'maxwidth': 500, 'maxheight': 300, 'wmode': 'opaque'}),
     ),
     PARAMS={'wmode': 'opaque', 'key': settings.EMBEDLY_KEY}
+)
+
+Entry.create_content_type(RawContent,
+    regions=('main', 'preview', 'cover',)
 )
