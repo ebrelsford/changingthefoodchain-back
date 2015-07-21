@@ -15,6 +15,7 @@ django-compressor==1.4
 django-cors-headers==1.1.0
 git+https://github.com/ebrelsford/django-inplace.git@v0.3.0
 django-leaflet==0.16.0
-git+https://github.com/ebrelsford/django-moderation.git@v0.3.6-fix-post-save
+django-moderation==0.3.6
+git+https://github.com/ebrelsford/django-inplace.git@v0.3.0
 git+https://github.com/ebrelsford/django-rest-framework.git@322c57d
 git+https://github.com/djangonauts/django-rest-framework-gis.git@b12691085
