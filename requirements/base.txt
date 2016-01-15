@@ -19,3 +19,4 @@ django-moderation==0.3.6
 git+https://github.com/ebrelsford/django-inplace.git@v0.3.0
 git+https://github.com/ebrelsford/django-rest-framework.git@322c57d
 git+https://github.com/djangonauts/django-rest-framework-gis.git@b12691085
+djangorestframework-csv==1.3.4

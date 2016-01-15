@@ -1,6 +1,8 @@
 from django.contrib.gis.geos import Polygon
 from django.db.models import Q
 from rest_framework import generics, mixins, renderers
+from rest_framework.settings import api_settings
+from rest_framework_csv.renderers import CSVRenderer
 
 from content.serializers import PhotoSerializer, VideoSerializer
 
@@ -51,6 +53,17 @@ class OrganizationNameList(generics.ListAPIView):
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+
+class OrganizationCSV(generics.ListAPIView):
+    renderer_classes = [CSVRenderer,] + api_settings.DEFAULT_RENDERER_CLASSES
+    serializer_class = OrganizationSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return Organization.objects.all()
 
 
 class OrganizationGeoJSONList(generics.ListAPIView):
